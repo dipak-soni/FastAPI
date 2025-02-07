@@ -27,3 +27,10 @@ def index(id):
 def index(id:int):
     # fetch comments with id
     return {"comments":"This is a comment section"}
+
+@app.get("/blogs")
+def index(limit):
+    # https://localhost:8000/blogs?limit=10
+    # 10 blogs would be shown 
+    return {"data":f"{limit} created "}
+
