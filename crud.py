@@ -1,7 +1,10 @@
+# It is a normal crud apis data stored in a list .
+
 from fastapi import FastAPI
 from pydantic import BaseModel,Field
 import json 
 
+# It is used for validiting response from the request just like we use serializer in django 
 class Book(BaseModel):
     id:int=Field()
     name:str=Field()
