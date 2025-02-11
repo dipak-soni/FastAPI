@@ -26,17 +26,15 @@ def show_nodes(pointer):
 def do_something(n,second_pointer):
     temp=second_pointer
     prev=second_pointer
-    d=n
-    while temp.val<=n.val and temp.next:
+    while temp.val<=n.val and temp:
         prev=temp
         temp=temp.next   # 1 3 4 7    1 
+    
     if temp==second_pointer:
-        d.next=temp
-        return d
+        return Node(n.val,temp)
     else:
-        t=prev.next
-        prev.next=d
-        d.next=t
+        new=Node(n.val,prev.next)
+        prev.next=new
         return second_pointer
 
     
@@ -52,7 +50,6 @@ def merge_sorted_list(first,second):
     else:
         while temp1!=None:
             final=do_something(temp1,second)
-            print('hello')
             temp1=temp1.next
         return final
 
