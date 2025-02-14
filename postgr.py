@@ -1,6 +1,6 @@
 
 import uvicorn
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, HTTPException, Depends,Response,status
 from sqlalchemy import Column, Integer, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
@@ -41,7 +41,7 @@ def get_db():
         db.close()
 
 # ✅ Create (POST)
-@app.post("/items/")
+@app.post("/items/",status_code=status.HTTP_201_CREATED)
 async def create_item(item: ItemCreate, db: Session = Depends(get_db)):
     db_item = Item(name=item.name, description=item.description)
     db.add(db_item)
@@ -79,6 +79,18 @@ async def delete_item(item_id: int, db: Session = Depends(get_db)):
     db.delete(db_item)
     db.commit()
     return {"message": "Item deleted successfully"}
+
+target=['12']
+
+@app.get('/demo/{id}',status_code=status.HTTP_200_OK)
+def demo(id,response:Response):
+    if id not in target:
+        # response.status_code=status.HTTP_404_NOT_FOUND
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail='Not found')
+    else:
+        # similar approrch but we will follow HTTPException here
+        response.status_code=status.HTTP_402_PAYMENT_REQUIRED
+        return {"message":"found"}
 
 # ✅ Run the FastAPI application
 if __name__ == "__main__":

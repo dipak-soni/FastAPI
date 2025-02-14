@@ -55,8 +55,8 @@ def merge_sorted_list(first,second):
 
             
 # first list
-l1=[1]
-l2=[1,3,4,7]
+l1=[0]
+l2=[1,2,3,4,5]
 first=None
 second=None
 for x in l1:
